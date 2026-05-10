@@ -5,6 +5,7 @@ package com.bank.ca2.enums;
  * @author Gustavo
  */
 public enum MenuOptionEnum {
+    
     SORT(1, "Sort Employee List"),
     SEARCH(2, "Search Employee"),
     ADD_RECORD(3, "Add New Employee"),
@@ -27,7 +28,7 @@ public enum MenuOptionEnum {
         return label;
     }
 
-    public static MenuOptionEnum fromInt(int value) {
+    public static MenuOptionEnum getByValue(int value) {
         for (MenuOptionEnum opt : values()) {
             if (opt.getOption() == value) {
                 return opt;

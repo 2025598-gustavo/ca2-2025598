@@ -1,7 +1,11 @@
 package com.bank.ca2;
 
 import com.bank.ca2.enums.MenuOptionEnum;
+import com.bank.ca2.model.Employee;
+import com.bank.ca2.services.EmployeeService;
+import com.bank.ca2.utils.FileReaderUtil;
 import com.bank.ca2.utils.InputValidator;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -11,8 +15,11 @@ import java.util.Scanner;
 public class CA2 {
 
     static Scanner sc = new Scanner(System.in);
+    static EmployeeService service = new EmployeeService();
 
     public static void main(String[] args) {
+        
+        loadEmployeesFromFile();
 
         while (true) {
             MenuOptionEnum option = null;
@@ -57,4 +64,23 @@ public class CA2 {
             }
         }
     }
+    
+    public static void loadEmployeesFromFile() {
+        System.out.println("Please enter the filename to read:");
+    
+        String fileName = sc.nextLine();
+        
+        List<Employee> employees = FileReaderUtil.readFile(fileName);
+        
+        if (employees.isEmpty()) {
+            System.out.println("No records loaded.");
+        } else {
+        
+            service.addAll(employees);
+
+            System.out.println(
+                    employees.size() + " employees loaded successfully."
+            );
+        }
+    } 
 }
