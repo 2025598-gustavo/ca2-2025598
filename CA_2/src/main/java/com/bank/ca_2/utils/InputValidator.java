@@ -1,4 +1,4 @@
-package com.bank.ca2.utils;
+package com.bank.ca_2.utils;
 
 import java.util.Scanner;
 

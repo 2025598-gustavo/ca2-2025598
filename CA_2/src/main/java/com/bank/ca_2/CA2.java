@@ -1,10 +1,10 @@
-package com.bank.ca2;
+package com.bank.ca_2;
 
-import com.bank.ca2.enums.MenuOptionEnum;
-import com.bank.ca2.model.Employee;
-import com.bank.ca2.services.EmployeeService;
-import com.bank.ca2.utils.FileReaderUtil;
-import com.bank.ca2.utils.InputValidator;
+import com.bank.ca_2.enums.MenuOptionEnum;
+import com.bank.ca_2.model.Employee;
+import com.bank.ca_2.services.EmployeeService;
+import com.bank.ca_2.utils.FileReaderUtil;
+import com.bank.ca_2.utils.InputValidator;
 import java.util.List;
 import java.util.Scanner;
 

@@ -10,4 +10,5 @@
         <maven.compiler.release>24</maven.compiler.release>
         <exec.mainClass>com.mycompany.ca2.CA2</exec.mainClass>
     </properties>
+    <name>CA_2</name>
 </project>

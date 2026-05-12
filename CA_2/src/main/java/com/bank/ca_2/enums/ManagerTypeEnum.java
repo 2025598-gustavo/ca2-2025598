@@ -1,4 +1,4 @@
-package com.bank.ca2.enums;
+package com.bank.ca_2.enums;
 
 /**
  *

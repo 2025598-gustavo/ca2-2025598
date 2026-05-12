@@ -1,7 +1,7 @@
-package com.bank.ca2.model;
+package com.bank.ca_2.model;
 
-import com.bank.ca2.enums.DepartmentTypeEnum;
-import com.bank.ca2.enums.ManagerTypeEnum;
+import com.bank.ca_2.enums.DepartmentTypeEnum;
+import com.bank.ca_2.enums.ManagerTypeEnum;
 
 /**
  *

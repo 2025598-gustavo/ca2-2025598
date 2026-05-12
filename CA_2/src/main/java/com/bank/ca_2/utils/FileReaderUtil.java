@@ -1,8 +1,8 @@
-package com.bank.ca2.utils;
+package com.bank.ca_2.utils;
 
-import com.bank.ca2.enums.DepartmentTypeEnum;
-import com.bank.ca2.enums.ManagerTypeEnum;
-import com.bank.ca2.model.Employee;
+import com.bank.ca_2.enums.DepartmentTypeEnum;
+import com.bank.ca_2.enums.ManagerTypeEnum;
+import com.bank.ca_2.model.Employee;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
