@@ -12,7 +12,7 @@ import java.util.Scanner;
  *
  * @author Gustavo
  */
-public class CA2 {
+public class CA_2 {
 
     static Scanner sc = new Scanner(System.in);
     static EmployeeService service = new EmployeeService();
