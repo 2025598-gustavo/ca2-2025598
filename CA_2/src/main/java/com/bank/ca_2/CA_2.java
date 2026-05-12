@@ -3,6 +3,7 @@ package com.bank.ca_2;
 import com.bank.ca_2.enums.MenuOptionEnum;
 import com.bank.ca_2.model.Employee;
 import com.bank.ca_2.services.EmployeeService;
+import com.bank.ca_2.services.MenuService;
 import com.bank.ca_2.utils.FileReaderUtil;
 import com.bank.ca_2.utils.InputValidator;
 import java.util.List;
@@ -15,7 +16,8 @@ import java.util.Scanner;
 public class CA_2 {
 
     static Scanner sc = new Scanner(System.in);
-    static EmployeeService service = new EmployeeService();
+    static EmployeeService employeeService = new EmployeeService();
+    static MenuService menuService = new MenuService(employeeService);
 
     public static void main(String[] args) {
         
@@ -45,7 +47,7 @@ public class CA_2 {
 
             switch (option) {
                 case SORT -> {
-                    // Implementation SORT
+                    menuService.handleSort();
                 }
                 case SEARCH -> {
                     // Implementation SEARCH
@@ -75,8 +77,7 @@ public class CA_2 {
         if (employees.isEmpty()) {
             System.out.println("No records loaded.");
         } else {
-        
-            service.addAll(employees);
+            employeeService.addAll(employees);
 
             System.out.println(
                     employees.size() + " employees loaded successfully."

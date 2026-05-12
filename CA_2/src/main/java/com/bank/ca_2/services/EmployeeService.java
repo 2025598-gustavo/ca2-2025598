@@ -19,15 +19,15 @@ public class EmployeeService {
     public List<Employee> getAllEmployees() {
         return employees;
     }
-    
+
     public List<String> getEmployeeNames() {
 
-    List<String> employeeNames = new ArrayList<>();
+        List<String> employeeNames = new ArrayList<>();
 
-    for (Employee employee : employees) {
-        employeeNames.add(employee.getFullName());
+        for (Employee employee : employees) {
+            employeeNames.add(employee.getFullName());
+        }
+
+        return employeeNames;
     }
-
-    return employeeNames;
-}
 }
