@@ -53,7 +53,7 @@ public class CA_2 {
                     menuService.handleSearch();
                 }
                 case ADD_RECORD -> {
-                    // Implementation ADD_RECORD
+                    menuService.handleAddRecord();
                 }
                 case BINARY_TREE -> {
                     // Implementation BINARY_TREE
