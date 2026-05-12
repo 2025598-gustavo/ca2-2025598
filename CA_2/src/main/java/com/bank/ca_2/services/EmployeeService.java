@@ -21,7 +21,6 @@ public class EmployeeService {
     }
 
     public List<String> getEmployeeNames() {
-
         List<String> employeeNames = new ArrayList<>();
 
         for (Employee employee : employees) {
@@ -30,4 +29,16 @@ public class EmployeeService {
 
         return employeeNames;
     }
+    
+    public Employee findByName(String targetName) {
+        for (Employee employee : employees) {
+
+            if (employee.getFullName().equalsIgnoreCase(targetName)) {
+                return employee;
+            }
+        }
+
+        return null;
+    }
+
 }

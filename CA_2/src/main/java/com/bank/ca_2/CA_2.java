@@ -17,7 +17,7 @@ public class CA_2 {
 
     static Scanner sc = new Scanner(System.in);
     static EmployeeService employeeService = new EmployeeService();
-    static MenuService menuService = new MenuService(employeeService);
+    static MenuService menuService = new MenuService(employeeService, sc);
 
     public static void main(String[] args) {
         
@@ -28,8 +28,8 @@ public class CA_2 {
 
             while (option == null) {
                 System.out.println("\n============================= "
-                        + "\n  Bank Organisation System "
-                        + "\n=============================");
+                                 + "\n  Bank Organisation System "
+                                 + "\n=============================");
 
                 System.out.println("\n========= Main Menu =========");
                 
@@ -50,7 +50,7 @@ public class CA_2 {
                     menuService.handleSort();
                 }
                 case SEARCH -> {
-                    // Implementation SEARCH
+                    menuService.handleSearch();
                 }
                 case ADD_RECORD -> {
                     // Implementation ADD_RECORD
