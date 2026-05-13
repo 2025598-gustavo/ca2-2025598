@@ -5,6 +5,7 @@ import com.bank.ca_2.algorithms.sorting.MergeSort;
 import com.bank.ca_2.enums.DepartmentTypeEnum;
 import com.bank.ca_2.enums.ManagerTypeEnum;
 import com.bank.ca_2.model.Employee;
+import com.bank.ca_2.structures.EmployeeBinaryTree;
 import com.bank.ca_2.utils.InputValidator;
 
 import java.util.List;
@@ -14,10 +15,12 @@ public class MenuService {
 
     private final EmployeeService employeeService;
     private final Scanner sc;
+    private final EmployeeBinaryTree tree;
 
     public MenuService(EmployeeService employeeService, Scanner sc) {
         this.employeeService = employeeService;
         this.sc = sc;
+        this.tree = new EmployeeBinaryTree();
     }
 
     public void handleSort() {
@@ -63,9 +66,9 @@ public class MenuService {
             System.out.println("Department: " + emp.getDepartment());
         }
     }
-    
-     public void handleAddRecord() {
-        System.out.println("\nPlease input the Employee Name:" );
+
+    public void handleAddRecord() {
+        System.out.println("\nPlease input the Employee Name:");
 
         String name = sc.nextLine();
 
@@ -87,7 +90,7 @@ public class MenuService {
                 System.out.println("Invalid manager option.");
             }
         }
-        
+
         DepartmentTypeEnum department = null;
 
         while (department == null) {
@@ -107,20 +110,43 @@ public class MenuService {
         }
 
         Employee employee = new Employee(
-                                    name,
-                                    "not_provided@email.com", // e-mail
-                                    0.0, // Salary
-                                    "Bank Organisation", // Bank organization
-                                    "Not Assigned", // Job title
-                                    manager,
-                                    department
-                                );
+                name,
+                "not_provided@email.com", // e-mail
+                0.0, // Salary
+                "Bank Organisation", // Bank organization
+                "Not Assigned", // Job title
+                manager,
+                department
+        );
 
         employeeService.addEmployee(employee);
 
         System.out.println("\n\"" + name + "\" has been added as \""
-                + manager.getLabel()+ "\" to \"" + department.getLabel()
+                + manager.getLabel() + "\" to \"" + department.getLabel()
                 + "\" successfully!"
         );
+    }
+
+    public void handleBinaryTree() {
+        List<Employee> employees = employeeService.getAllEmployees();
+
+        if (employees.isEmpty()) {
+            System.out.println("No employees loaded.");
+            return;
+        }
+
+        // INSERT INTO TREE
+        for (Employee employee : employees) {
+            tree.insert(employee);
+        }
+
+        // DISPLAY TREE
+        tree.levelOrderTraversal();
+
+        // HEIGHT
+        System.out.println("\nTree Height: " + tree.getHeight(tree.getRoot()));
+
+        // TOTAL NODES
+        System.out.println("Total Nodes: "+ tree.countNodes(tree.getRoot()));
     }
 }

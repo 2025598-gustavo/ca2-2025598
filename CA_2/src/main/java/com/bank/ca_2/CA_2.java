@@ -56,7 +56,7 @@ public class CA_2 {
                     menuService.handleAddRecord();
                 }
                 case BINARY_TREE -> {
-                    // Implementation BINARY_TREE
+                    menuService.handleBinaryTree();
                 }
                 case EXIT -> {
                     System.out.println("Exiting program...");
