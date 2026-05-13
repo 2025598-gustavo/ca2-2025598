@@ -14,10 +14,7 @@ public class EmployeeBinaryTree {
         return root;
     }
 
-    // =========================================
-    // LEVEL ORDER INSERTION
-    // =========================================
-
+    // Level order insertion
     public void insert(Employee employee) {
         EmployeeNode newNode = new EmployeeNode(employee);
 
@@ -54,10 +51,7 @@ public class EmployeeBinaryTree {
         }
     }
 
-    // =========================================
-    // LEVEL ORDER TRAVERSAL
-    // =========================================
-
+    // Level order traversal
     public void levelOrderTraversal() {
         if (root == null) {
             System.out.println("Tree is empty.");
@@ -87,20 +81,12 @@ public class EmployeeBinaryTree {
         }
     }
 
-    // =========================================
-    // COUNT NODES
-    // =========================================
-
     public int countNodes(EmployeeNode root) {
         if (root == null) {
             return 0;
         }
         return 1 + countNodes(root.getLeft()) + countNodes(root.getRight());
     }
-
-    // =========================================
-    // TREE HEIGHT
-    // =========================================
 
     public int getHeight(EmployeeNode root) {
         if (root == null) {

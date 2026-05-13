@@ -145,7 +145,7 @@ public class MenuService {
 
         // HEIGHT
         System.out.println("\nTree Height: " + tree.getHeight(tree.getRoot()));
-
+        
         // TOTAL NODES
         System.out.println("Total Nodes: "+ tree.countNodes(tree.getRoot()));
     }

@@ -7,6 +7,7 @@ import com.bank.ca_2.services.MenuService;
 import com.bank.ca_2.utils.FileReaderUtil;
 import com.bank.ca_2.utils.InputValidator;
 import java.util.List;
+import java.io.File;
 import java.util.Scanner;
 
 /**
@@ -20,7 +21,7 @@ public class CA_2 {
     static MenuService menuService = new MenuService(employeeService, sc);
 
     public static void main(String[] args) {
-        
+
         loadEmployeesFromFile();
 
         while (true) {
@@ -28,11 +29,11 @@ public class CA_2 {
 
             while (option == null) {
                 System.out.println("\n============================= "
-                                 + "\n  Bank Organisation System "
-                                 + "\n=============================");
+                        + "\n  Bank Organisation System "
+                        + "\n=============================");
 
                 System.out.println("\n========= Main Menu =========");
-                
+
                 for (MenuOptionEnum opt : MenuOptionEnum.values()) {
                     System.out.println(opt.getOption() + ". " + opt.getLabel());
                 }
@@ -66,22 +67,30 @@ public class CA_2 {
             }
         }
     }
-    
-    public static void loadEmployeesFromFile() {
-        System.out.println("Please enter the filename to read:");
-    
-        String fileName = sc.nextLine();
-        
-        List<Employee> employees = FileReaderUtil.readFile(fileName);
-        
-        if (employees.isEmpty()) {
-            System.out.println("No records loaded.");
-        } else {
-            employeeService.addAll(employees);
 
-            System.out.println(
-                    employees.size() + " employees loaded successfully."
-            );
+    public static void loadEmployeesFromFile() {
+        while (true) {
+            System.out.println("Please enter the filename to read:");
+
+            String fileName = sc.nextLine();
+
+            File file = new File(fileName);
+
+            if (!file.exists()) {
+                System.out.println("File not found. Please try again.");
+                continue;
+            }
+
+            List<Employee> employees = FileReaderUtil.readFile(fileName);
+
+            if (employees.isEmpty()) {
+                System.out.println("No records loaded.");
+            } else {
+                employeeService.addAll(employees);
+
+                System.out.println(employees.size() + " employees loaded successfully.");
+                break;
+            }
         }
-    } 
+    }
 }
