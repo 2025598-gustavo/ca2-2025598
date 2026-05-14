@@ -45,8 +45,7 @@ public class FileReaderUtil {
 
                 String email = parts[3].trim();
 
-                double salary =
-                        Double.parseDouble(parts[4].trim());
+                double salary = Double.parseDouble(parts[4].trim());
 
                 String departmentValue = parts[5].trim();
                 String managerValue = parts[6].trim();
@@ -56,11 +55,10 @@ public class FileReaderUtil {
 
                 String fullName = firstName + " " + lastName;
 
-                ManagerTypeEnum manager =
-                        ManagerTypeEnum.fromString(managerValue);
+                ManagerTypeEnum manager = ManagerTypeEnum.fromString(managerValue);
 
-                DepartmentTypeEnum department =
-                        DepartmentTypeEnum.fromString(departmentValue);
+                DepartmentTypeEnum department = DepartmentTypeEnum.fromString(
+                        departmentValue);
 
                 Employee employee = new Employee(
                         fullName,

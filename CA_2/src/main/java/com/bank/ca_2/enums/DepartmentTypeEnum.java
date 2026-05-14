@@ -14,7 +14,8 @@ public enum DepartmentTypeEnum {
     ACCOUNTING(6, "Accounting"),
     OPERATIONS(7, "Operations"),
     TECHNICAL_SUPPORT(8, "Technical Support"),
-    CUSTOMER_SERVICE(9, "Customer Service");
+    CUSTOMER_SERVICE(9, "Customer Service"),
+    UNKNOWN(0, "Unknown");
 
     private final int option;
     private final String label;
@@ -47,30 +48,20 @@ public enum DepartmentTypeEnum {
 
     public static DepartmentTypeEnum fromString(String value) {
         if (value == null || value.isBlank()) {
-            return null;
+            return UNKNOWN;
         }
 
         return switch (value.toLowerCase()) {
-
             case "it development" -> IT_DEVELOPMENT;
-
             case "sales" -> SALES;
-
             case "hr" -> HR;
-
             case "finance" -> FINANCE;
-
             case "marketing" -> MARKETING;
-
             case "accounting" -> ACCOUNTING;
-
             case "operations" -> OPERATIONS;
-
             case "technical support" -> TECHNICAL_SUPPORT;
-
             case "customer service" -> CUSTOMER_SERVICE;
-
-            default -> null;
+            default -> UNKNOWN;
         };
     }
 }
