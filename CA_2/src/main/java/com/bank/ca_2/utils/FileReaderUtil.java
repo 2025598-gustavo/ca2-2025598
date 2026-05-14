@@ -68,7 +68,7 @@ public class FileReaderUtil {
                         jobTitle,
                         manager,
                         department
-                );
+                );  
 
                 employees.add(employee);
             }

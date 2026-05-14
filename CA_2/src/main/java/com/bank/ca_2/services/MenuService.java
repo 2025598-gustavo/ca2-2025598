@@ -11,18 +11,47 @@ import com.bank.ca_2.utils.InputValidator;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Service class responsible for handling all menu operations.
+ * 
+ * This class controls:
+ * - Sorting employee names
+ * - Searching employees
+ * - Adding new employee records
+ * - Building and displaying the employee binary tree
+ * 
+ * The class acts as the main interaction layer between
+ * the user and the system business logic.
+ * 
+ * @author Gustavo
+ */
 public class MenuService {
 
     private final EmployeeService employeeService;
     private final Scanner sc;
     private final EmployeeBinaryTree tree;
 
+    /**
+     * Constructor used to initialize dependencies.
+     * 
+     * @param employeeService employee service instance
+     * @param sc scanner for user input
+     */
     public MenuService(EmployeeService employeeService, Scanner sc) {
+
         this.employeeService = employeeService;
         this.sc = sc;
         this.tree = new EmployeeBinaryTree();
     }
 
+    /**
+     * Handles the SORT menu option.
+     * 
+     * Retrieves all employee names and sorts them alphabetically using 
+     * recursive Merge Sort.
+     * 
+     * Displays only the first 20 sorted names.
+     */
     public void handleSort() {
         List<String> names = employeeService.getEmployeeNames();
 
@@ -31,15 +60,25 @@ public class MenuService {
 
         System.out.println("\n===== FIRST 20 SORTED NAMES =====");
 
+        // Display first 20 names
         for (int i = 0; i < Math.min(20, names.size()); i++) {
             System.out.println((i + 1) + ". " + names.get(i));
         }
     }
 
+    /**
+     * Handles the SEARCH menu option.
+     * 
+     * Uses recursive Binary Search to locate an employee by full name from the 
+     * sorted list.
+     * 
+     * Displays employee name, manager type,
+     * and department if found.
+     */
     public void handleSearch() {
         List<String> names = employeeService.getEmployeeNames();
 
-        // Binary Search requires sorted list
+        // Binary Search requires sorted data
         MergeSort.mergeSort(names, 0, names.size() - 1);
 
         System.out.println("\n====== SEARCH EMPLOYEE ======");
@@ -47,12 +86,13 @@ public class MenuService {
 
         String fullName = sc.nextLine().trim();
 
+        // Recursive Binary Search
         int result = BinarySearch.binarySearch(
-                names,
-                0,
-                names.size() - 1,
-                fullName
-        );
+                        names,
+                        0,
+                        names.size() - 1,
+                        fullName
+                );
 
         if (result == -1) {
             System.out.println("Employee not found.");
@@ -67,18 +107,29 @@ public class MenuService {
         }
     }
 
+    /**
+     * Handles the ADD RECORD menu option.
+     * 
+     * Allows the user to:
+     * - Enter employee name
+     * - Select manager type
+     * - Select department
+     * 
+     * User input is validated using enums.
+     * 
+     * The employee is then added to memory.
+     */
     public void handleAddRecord() {
         System.out.println("\nPlease input the Employee Name:");
 
         String name = sc.nextLine();
-
         ManagerTypeEnum manager = null;
 
         while (manager == null) {
-
             System.out.println("\nPlease select from the following Management "
                     + "Staff:");
 
+            // Display manager options
             for (ManagerTypeEnum type : ManagerTypeEnum.values()) {
                 System.out.println(type.getOption() + ". " + type.getLabel());
             }
@@ -86,17 +137,21 @@ public class MenuService {
             int choice = InputValidator.getValidInt(sc);
             manager = ManagerTypeEnum.getByValue(choice);
 
+            // Validate manager option
             if (manager == null) {
                 System.out.println("Invalid manager option.");
             }
         }
 
+        
+        // DEPARTMENT SELECTION
         DepartmentTypeEnum department = null;
 
         while (department == null) {
 
             System.out.println("\nPlease select the Department:");
 
+            // Display department options
             for (DepartmentTypeEnum dept : DepartmentTypeEnum.values()) {
                 System.out.println(dept.getOption() + ". " + dept.getLabel());
             }
@@ -110,15 +165,16 @@ public class MenuService {
         }
 
         Employee employee = new Employee(
-                name,
-                "not_provided@email.com", // e-mail
-                0.0, // Salary
-                "Bank Organisation", // Bank organization
-                "Not Assigned", // Job title
-                manager,
-                department
-        );
+                        name,
+                        "not_provided@email.com", // e-mail
+                        0.0, // Salary
+                        "Bank Organisation", // Bank organization
+                        "Not Assigned", // Job title
+                        manager,
+                        department
+                );
 
+        // Add employee to system
         employeeService.addEmployee(employee);
 
         System.out.println("\n\"" + name + "\" has been added as \""
@@ -127,9 +183,22 @@ public class MenuService {
         );
     }
 
+    /**
+     * Handles the BINARY TREE menu option.
+     * 
+     * Inserts employees into the binary tree using level-order insertion.
+     * 
+     * Displays:
+     * - Employee hierarchy
+     * - Tree height
+     * - Total node count
+     */
     public void handleBinaryTree() {
+
+        // Get all employees
         List<Employee> employees = employeeService.getAllEmployees();
 
+        // Validate employee list
         if (employees.isEmpty()) {
             System.out.println("No employees loaded.");
             return;
@@ -145,7 +214,7 @@ public class MenuService {
 
         // HEIGHT
         System.out.println("\nTree Height: " + tree.getHeight(tree.getRoot()));
-        
+
         // TOTAL NODES
         System.out.println("Total Nodes: "+ tree.countNodes(tree.getRoot()));
     }

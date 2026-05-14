@@ -35,7 +35,6 @@ public class BinarySearch {
 
         // Search left half
         if (target.compareToIgnoreCase(list.get(mid)) < 0) {
-
             return binarySearch(
                     list,
                     left,

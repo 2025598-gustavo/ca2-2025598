@@ -2,8 +2,6 @@ package com.bank.ca_2.structures;
 
 import com.bank.ca_2.model.Employee;
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Queue;
 
 /**
  *
@@ -65,8 +63,10 @@ public class EmployeeBinaryTree {
         queue.add(root);
         int level = 0;
 
-        System.out.println("\n===== EMPLOYEE HIERARCHY =====\n");
+        System.out.println("\n===== EMPLOYEE HIERARCHY =====");
 
+        System.out.println("\n===== NAME | Manager Type | Department =====");
+        
         while (!queue.isEmpty()) {
             int size = queue.size();
             System.out.println("Level " + level + ":");
@@ -74,13 +74,13 @@ public class EmployeeBinaryTree {
             for (int i = 0; i < size; i++) {
                 EmployeeNode current = queue.remove(0);
                 Employee e = current.getEmployee();
-                System.out.printf("  [%s] - %s - %s%n", e.getFullName(), 
+                System.out.printf("  [%s] - %s - %s%n", e.getFullName(),
                         e.getManagerType(), e.getDepartment());
 
                 if (current.getLeft() != null) {
                     queue.add(current.getLeft());
                 }
-                if (current.getRight() != null){
+                if (current.getRight() != null) {
                     queue.add(current.getRight());
                 }
             }
