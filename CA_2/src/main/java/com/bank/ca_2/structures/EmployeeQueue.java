@@ -13,11 +13,15 @@ package com.bank.ca_2.structures;
  * @author Gustavo
  */
 public class EmployeeQueue {
+    
     private final EmployeeNode[] arr;
+    
     // Index of the front element
     private int front;
+    
     // Index of the rear element
     private int rear;
+    
     // Maximum queue capacity
     private final int capacity;
 
