@@ -1,6 +1,9 @@
 package com.bank.ca_2.structures;
 
 import com.bank.ca_2.model.Employee;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 
 /**
  *
@@ -58,26 +61,30 @@ public class EmployeeBinaryTree {
             return;
         }
 
-        int totalNodes = countNodes(root);
+        ArrayList<EmployeeNode> queue = new ArrayList<>();
+        queue.add(root);
+        int level = 0;
 
-        EmployeeQueue queue = new EmployeeQueue(totalNodes);
-
-        queue.enqueue(root);
-
-        System.out.println("\n===== EMPLOYEE HIERARCHY =====");
+        System.out.println("\n===== EMPLOYEE HIERARCHY =====\n");
 
         while (!queue.isEmpty()) {
-            EmployeeNode current = queue.dequeue();
+            int size = queue.size();
+            System.out.println("Level " + level + ":");
 
-            System.out.println(current.getEmployee());
+            for (int i = 0; i < size; i++) {
+                EmployeeNode current = queue.remove(0);
+                Employee e = current.getEmployee();
+                System.out.printf("  [%s] - %s - %s%n", e.getFullName(), 
+                        e.getManagerType(), e.getDepartment());
 
-            if (current.getLeft() != null) {
-                queue.enqueue(current.getLeft());
+                if (current.getLeft() != null) {
+                    queue.add(current.getLeft());
+                }
+                if (current.getRight() != null){
+                    queue.add(current.getRight());
+                }
             }
-
-            if (current.getRight() != null) {
-                queue.enqueue(current.getRight());
-            }
+            level++; //increase lever after displays every node in the line
         }
     }
 
