@@ -21,6 +21,8 @@ public class EmployeeService {
 
     // List used to store all employee records
     private final List<Employee> employees = new ArrayList<>();
+    private boolean sorted = false;
+    private List<String> sortedEmployeeNames = new ArrayList<>();
 
     /**
      * Adds a single employee to the employee list.
@@ -29,6 +31,8 @@ public class EmployeeService {
      */
     public void addEmployee(Employee employee) {
         employees.add(employee);
+        sorted = false;
+        sortedEmployeeNames.clear();
     }
 
     /**
@@ -40,6 +44,8 @@ public class EmployeeService {
      */
     public void addAll(List<Employee> list) {
         employees.addAll(list);
+        sorted = false;
+        sortedEmployeeNames.clear();
     }
 
     /**
@@ -87,5 +93,37 @@ public class EmployeeService {
             }
         }
         return null;
+    }
+    
+    /**
+     * Checks whether the employee list has already been sorted.
+     *
+     * @return true if the SORT option was executed successfully
+     */
+    public boolean isSorted() {
+        return sorted;
+    }
+
+    /**
+     * Saves the sorted employee name list.
+     *
+     * This method is called only after the SORT option is executed.
+     *
+     * @param sortedNames sorted employee names
+     */
+    public void setSortedEmployeeNames(List<String> sortedNames) {
+        this.sortedEmployeeNames = sortedNames;
+        this.sorted = true;
+    }
+
+    /**
+     * Returns the sorted employee name list.
+     *
+     * This list should only be used by Binary Search.
+     *
+     * @return sorted employee names
+     */
+    public List<String> getSortedEmployeeNames() {
+        return sortedEmployeeNames;
     }
 }

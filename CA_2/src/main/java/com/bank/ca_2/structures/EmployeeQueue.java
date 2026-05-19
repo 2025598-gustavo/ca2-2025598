@@ -31,7 +31,6 @@ public class EmployeeQueue {
      * @param capacity maximum queue size
      */
     public EmployeeQueue(int capacity) {
-
         this.capacity = capacity;
 
         // Create queue array
@@ -48,7 +47,6 @@ public class EmployeeQueue {
      * @return true if queue is empty
      */
     public boolean isEmpty() {
-
         return front == -1;
     }
 
@@ -73,22 +71,17 @@ public class EmployeeQueue {
 
         // Prevent insertion if queue is full
         if (isFull()) {
-
             System.out.println("Queue is full!");
             return;
         }
 
         // First element insertion
         if (isEmpty()) {
-
             front = rear = 0;
-
         } else {
-
             // Circular increment
             rear = (rear + 1) % capacity;
         }
-
         // Insert node
         arr[rear] = node;
     }
@@ -100,7 +93,7 @@ public class EmployeeQueue {
      * @return removed node or null if empty
      */
     public EmployeeNode dequeue() {
-
+        
         // Queue empty validation
         if (isEmpty()) {
             return null;
@@ -111,15 +104,11 @@ public class EmployeeQueue {
 
         // Last element removed
         if (front == rear) {
-
             front = rear = -1;
-
         } else {
-
             // Circular increment
             front = (front + 1) % capacity;
         }
-
         return temp;
     }
 }

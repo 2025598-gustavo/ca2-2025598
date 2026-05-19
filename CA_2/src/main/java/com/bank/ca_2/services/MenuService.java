@@ -46,17 +46,26 @@ public class MenuService {
 
     /**
      * Handles the SORT menu option.
-     * 
-     * Retrieves all employee names and sorts them alphabetically using 
+     *
+     * Retrieves all employee names and sorts them alphabetically using
      * recursive Merge Sort.
-     * 
-     * Displays only the first 20 sorted names.
+     *
+     * After sorting, the sorted list is stored in EmployeeService.
+     * This allows Binary Search to be used later.
      */
     public void handleSort() {
         List<String> names = employeeService.getEmployeeNames();
 
+        if (names.isEmpty()) {
+            System.out.println("Employee list is empty. No records to sort.");
+            return;
+        }
+
         // Recursive Merge Sort
         MergeSort.mergeSort(names, 0, names.size() - 1);
+
+        // Save sorted list in memory
+        employeeService.setSortedEmployeeNames(names);
 
         System.out.println("\n===== FIRST 20 SORTED NAMES =====");
 
@@ -64,39 +73,52 @@ public class MenuService {
         for (int i = 0; i < Math.min(20, names.size()); i++) {
             System.out.println((i + 1) + ". " + names.get(i));
         }
+
+        System.out.println("\nEmployee list has been sorted successfully.");
     }
 
-    /**
+     /**
      * Handles the SEARCH menu option.
-     * 
-     * Uses recursive Binary Search to locate an employee by full name from the 
-     * sorted list.
-     * 
-     * Displays employee name, manager type,
-     * and department if found.
+     *
+     * Binary Search only works correctly on sorted data.
+     *
+     * Therefore, this method first checks whether the SORT option
+     * has already been executed.
      */
     public void handleSearch() {
-        List<String> names = employeeService.getEmployeeNames();
+        if (!employeeService.isSorted()) {
+            System.out.println("\nSearch is not available yet.");
+            System.out.println("Please sort the employee list first using option 1.");
+            return;
+        }
 
-        // Binary Search requires sorted data
-        MergeSort.mergeSort(names, 0, names.size() - 1);
+        List<String> names = employeeService.getSortedEmployeeNames();
+
+        if (names.isEmpty()) {
+            System.out.println("Employee list is empty. No records to search.");
+            return;
+        }
 
         System.out.println("\n====== SEARCH EMPLOYEE ======");
         System.out.println("Enter FULL employee name to search: ");
 
         String fullName = sc.nextLine().trim();
 
+        if (fullName.isBlank()) {
+            System.out.println("Invalid name. Please enter a valid employee name.");
+            return;
+        }
+        
         // Recursive Binary Search
         int result = BinarySearch.binarySearch(
-                        names,
-                        0,
-                        names.size() - 1,
-                        fullName
-                );
+                names,
+                0,
+                names.size() - 1,
+                fullName
+        );
 
         if (result == -1) {
             System.out.println("Employee not found.");
-
         } else {
             Employee emp = employeeService.findByName(fullName);
 
